@@ -1,27 +1,43 @@
-total_books = 6
-total_libraries = 2
-total_days = 7
+
+filename = "a_example.txt"
+file = open(filename, "r")
+
+#Read and save info from first line of file
+line = file.readline().split(" ")
+
+total_books = int(line[0])
+total_libraries = int(line[1])
+total_days = int(line[2])
+
+#Read and save info of scores (each score is stored in an array, as it is a mutable data type)
+line = file.readline().split(" ")
+scores = []
+for score in line:
+    arr = []
+    arr.append(int(score))
+    scores.append(arr)
+
+#Store all libraries available
 libraries = []
+#Store all signed up libraries
 registered_libraries = []
-
-scores = [[1], [2], [3], [6], [5], [4]]
-
+#Sum of all the scanned books scores
 final_score = 0
-
 
 def createLibrary(n_books, set_books, n_days, n_perday):
     library = {
         "stock": n_books,
-        "scores": [scores[x] for x in set_books],
+        "scores": [scores[int(x)] for x in set_books],
         "signup": n_days,
         "shipping": n_perday
     }
     return library
 
+for i in range(total_libraries):
+    lib_info = file.readline().split(" ")
+    libraries.append(createLibrary(int(lib_info[0]), file.readline().split(" "), int(lib_info[1]), int(lib_info[2])))
 
-libraries.append(createLibrary(5, [0, 1, 2, 3, 4], 2, 2))
-libraries.append(createLibrary(4, [3, 2, 5, 0], 3, 1))
-
+file.close()
 
 def calculateIntersections(y, days_left):
     intersect = (-1, None)
