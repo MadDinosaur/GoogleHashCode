@@ -1,5 +1,5 @@
 
-filename = "a_example.txt"
+filename = "input/a_example.txt"
 file = open(filename, "r")
 
 #Read and save info from first line of file
@@ -61,7 +61,7 @@ def calculateIntersections(y, days_left):
 days_left = total_days
 while days_left > 0:
     registering_lib = calculateIntersections(4, days_left)
-    if registering_lib is None:
+    if not registering_lib:
         idle_time = days_left
     else:
         idle_time = registering_lib["signup"]
@@ -75,4 +75,4 @@ while days_left > 0:
         days_left -= 1
     registered_libraries.append(registering_lib)
 
-print(final_score)
+print("total score = " + str(final_score))
